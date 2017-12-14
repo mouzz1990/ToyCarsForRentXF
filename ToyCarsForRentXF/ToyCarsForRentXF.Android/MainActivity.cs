@@ -14,6 +14,7 @@ namespace ToyCarsForRentXF.Droid
     {
         protected override void OnCreate(Bundle bundle)
         {
+            //this.Window.SetFlags(WindowManagerFlags.KeepScreenOn, WindowManagerFlags.KeepScreenOn);
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 

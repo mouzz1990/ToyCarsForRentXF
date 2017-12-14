@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -59,7 +60,8 @@ namespace ToyCarsForRentXF.ViewModels
                         MinutesCount = Minutes,
                         Price = Price,
                         ToyCarId = ToyCarEntry.CarId,
-                        RentDateTime = DateTime.Now
+                        RentDateTime = DateTime.Now,
+                        ToyCarEntry = ToyCarEntry
                     };
 
                     App.ReportDatabase.SaveItem(rc);
@@ -68,12 +70,14 @@ namespace ToyCarsForRentXF.ViewModels
                     ToyCarEntry.State.IsFree = false;
                     ToyCarEntry.State.Minutes = Minutes;
 
+                    Debug.WriteLine("DEBUG: " + DateTime.Now);
                     //Start timer and timer callback function
                     Device.StartTimer(TimeSpan.FromMinutes(1),
                         () =>
                         {
+                            Debug.WriteLine("DEBUG: " + ToyCarEntry.State.Minutes);
                             ToyCarEntry.State.Minutes--;
-
+                            
                             if (ToyCarEntry.State.Minutes == 0)
                             {
                                 ToyCarEntry.State.IsFree = true;

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToyCarsForRentXF.Views.ReportPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Text="Start Date:" HorizontalOptions="End" VerticalOptions="Center"/>
+                <DatePicker Grid.Row="0" Grid.Column="1" Date="{Binding StartDate}" HorizontalOptions="Start"/>
+
+                <Label Grid.Row="1" Grid.Column="0" Text="End Date:" HorizontalOptions="End" VerticalOptions="Center"/>
+                <DatePicker Grid.Row="1" Grid.Column="1" Date="{Binding EndDate}" HorizontalOptions="Start"/>
+            </Grid>
+            <Button Text="Get Report" Command="{Binding ReportCommand}"/>
+            <ListView HasUnevenRows="True" ItemsSource="{Binding ReportOutput}" Margin="5">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0" Text="{Binding CarTitle}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                <Label Grid.Column="1" Text="{Binding RentDate}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                <Label Grid.Column="2" Text="{Binding Minutes}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                <Label Grid.Column="3" Text="{Binding Price}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

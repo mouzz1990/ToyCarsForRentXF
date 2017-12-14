@@ -19,7 +19,6 @@ namespace ToyCarsForRentXF
             mvm = new MainViewModel(Navigation, this);
             
             BindingContext = mvm;
-
         }
     }
 }

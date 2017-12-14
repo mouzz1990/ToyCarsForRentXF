@@ -129,6 +129,21 @@ namespace ToyCarsForRentXF.ViewModels
             }
         }
 
+        private ICommand reportCommand;
+
+        public ICommand ReportCommand
+        {
+            get
+            {
+                return reportCommand ?? (reportCommand = new Command(async () => 
+                {
+                    ReportPage rp = new ReportPage();
+                    await Navigation.PushAsync(rp);
+                }));
+
+            }
+        }
+
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

@@ -49,5 +49,14 @@ namespace ToyCarsForRentXF.Models
             get { return rentDateTime; }
             set { rentDateTime = value; }
         }
+
+        private ToyCar toyCarEntry;
+        [Ignore]
+        public ToyCar ToyCarEntry
+        {
+            get { return toyCarEntry; }
+            set { toyCarEntry = value; }
+        }
+
     }
 }

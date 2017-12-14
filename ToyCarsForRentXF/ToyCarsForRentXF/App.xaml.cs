@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using ToyCarsForRentXF.DataBase;
@@ -52,11 +53,13 @@ namespace ToyCarsForRentXF
         protected override void OnSleep()
         {
             // Handle when your app sleeps
+            Debug.WriteLine("Sleeping");
         }
 
         protected override void OnResume()
         {
             // Handle when your app resumes
+            Debug.WriteLine("Resuming");
         }
     }
 }
