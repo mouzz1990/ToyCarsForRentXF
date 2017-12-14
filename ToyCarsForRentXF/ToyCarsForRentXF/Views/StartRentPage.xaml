@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToyCarsForRentXF.Views.StartRentPage" Title="Start Tracking">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="{Binding ToyCarEntry.CarTitle}" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Image Grid.Row="1" Source="{Binding ToyCarEntry.ImageName}"/>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="Minutes:" HorizontalOptions="End" VerticalOptions="Center" FontSize="Medium"/>
+                    <Entry Grid.Column="1" Text="{Binding Minutes}" Keyboard="Numeric"/>
+                    <Button Grid.Column="2" Text="Start" Command="{Binding StartCommand}"/>
+                </Grid>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

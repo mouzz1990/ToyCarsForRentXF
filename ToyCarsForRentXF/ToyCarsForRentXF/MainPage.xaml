@@ -2,12 +2,38 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ToyCarsForRentXF"
-             x:Class="ToyCarsForRentXF.MainPage">
+             x:Class="ToyCarsForRentXF.MainPage"
+             x:Name="contentPage" Title="Toy Cars For Rent"
+             >
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Text="-" Command="{Binding RemoveToyCarCommand}"/>
+                <Button Grid.Column="1" Text="E" Command="{Binding EditToyCarCommand}" />
+                <Button Grid.Column="3" Text="+" Command="{Binding AddToyCarCommand}"/>
+            </Grid>
+            <ListView ItemsSource="{Binding ToyCars}" HasUnevenRows="True" SelectedItem="{Binding Path=BindingContext.SelectedCar, Source={x:Reference contentPage}}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Text="{Binding CarTitle}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                <Button Grid.Column="1" Command="{Binding Path=BindingContext.ToyCarClickCommand, Source={x:Reference contentPage}}" CommandParameter="{Binding}" Text="Start"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

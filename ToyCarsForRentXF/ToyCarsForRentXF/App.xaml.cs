@@ -13,7 +13,7 @@ namespace ToyCarsForRentXF
         {
             InitializeComponent();
 
-            MainPage = new ToyCarsForRentXF.MainPage();
+            MainPage = new NavigationPage(new ToyCarsForRentXF.MainPage());
         }
 
         protected override void OnStart()

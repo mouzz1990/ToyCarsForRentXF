@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToyCarsForRentXF.Views.ToyCarPage"
+             Title="Toy Car Information">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+            
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="Car Title: " VerticalOptions="Center" FontSize="Medium"/>
+                    <Entry Grid.Column="1" Text="{Binding ToyCarEntire.CarTitle}"/>
+                </Grid>
+
+                <Image Grid.Row="1" Source="{Binding ToyCarEntire.ImageName}"/>
+
+                <Button Grid.Row="2" Text="Select Image" Command="{Binding SelectImageCommand}"/>
+                
+                <Button Grid.Row="3" Text="Save" Command="{Binding SaveCommand}"/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
