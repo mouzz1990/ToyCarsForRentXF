@@ -4,31 +4,50 @@
              xmlns:local="clr-namespace:ToyCarsForRentXF"
              x:Class="ToyCarsForRentXF.MainPage"
              x:Name="contentPage" Title="Toy Cars For Rent"
-             >
+             xmlns:conv="clr-namespace:ToyCarsForRentXF.Converters">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:BoolToBackgroundConverter x:Key="boolToBackgroundConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout Margin="5">
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Text="-" Command="{Binding RemoveToyCarCommand}"/>
-                <Button Grid.Column="1" Text="E" Command="{Binding EditToyCarCommand}" />
-                <Button Grid.Column="3" Text="+" Command="{Binding AddToyCarCommand}"/>
+                <Button Grid.Column="0" Text="-" WidthRequest="50" HeightRequest="50" Command="{Binding RemoveToyCarCommand}"/>
+                <Button Grid.Column="1" Text="E" WidthRequest="50" HeightRequest="50" Command="{Binding EditToyCarCommand}" />
+                <Button Grid.Column="3" Text="+" WidthRequest="50" HeightRequest="50" Command="{Binding AddToyCarCommand}"/>
             </Grid>
             <ListView ItemsSource="{Binding ToyCars}" HasUnevenRows="True" SelectedItem="{Binding Path=BindingContext.SelectedCar, Source={x:Reference contentPage}}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid>
+                            <Grid BackgroundColor="{Binding State.IsFree, Converter={StaticResource Key=boolToBackgroundConverter}}" Margin="3" Padding="3">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Row="0" Text="{Binding CarTitle}" VerticalOptions="Center" HorizontalOptions="Center"/>
-                                <Button Grid.Column="1" Command="{Binding Path=BindingContext.ToyCarClickCommand, Source={x:Reference contentPage}}" CommandParameter="{Binding}" Text="Start"/>
+                                <StackLayout Grid.Row="0">
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding CarTitle}"  FontSize="Large"/>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Minutes: " VerticalOptions="End" HorizontalOptions="Center" FontSize="Medium"/>
+                                        <Label Text="{Binding State.Minutes}" VerticalOptions="End" HorizontalOptions="Center" FontSize="Medium"/>
+                                    </StackLayout>
+                                    
+                                </StackLayout>
+                                <Button IsEnabled="{Binding State.IsFree}" Grid.Column="1" Command="{Binding Path=BindingContext.ToyCarClickCommand, Source={x:Reference contentPage}}" CommandParameter="{Binding}" Text="Start"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

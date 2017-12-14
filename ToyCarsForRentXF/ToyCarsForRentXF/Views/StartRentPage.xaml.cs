@@ -17,7 +17,7 @@ namespace ToyCarsForRentXF.Views
         public StartRentPage(ToyCar car)
         {
             InitializeComponent();
-            srvm = new StartRentViewModel(car);
+            srvm = new StartRentViewModel(car, Navigation);
 
             BindingContext = srvm;
         }

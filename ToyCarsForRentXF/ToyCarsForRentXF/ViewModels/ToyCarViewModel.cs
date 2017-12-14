@@ -35,6 +35,8 @@ namespace ToyCarsForRentXF.ViewModels
             {
                 return saveCommand ?? (saveCommand = new Command(async () => 
                 {
+                    App.ToyCarDatabase.SaveItem(ToyCarEntire);
+
                     await Navigation.PopAsync();
                 }
                 ));

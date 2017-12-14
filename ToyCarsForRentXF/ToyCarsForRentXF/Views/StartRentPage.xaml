@@ -9,18 +9,28 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Text="{Binding ToyCarEntry.CarTitle}" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center"/>
                 <Image Grid.Row="1" Source="{Binding ToyCarEntry.ImageName}"/>
                 <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Text="Minutes:" HorizontalOptions="End" VerticalOptions="Center" FontSize="Medium"/>
-                    <Entry Grid.Column="1" Text="{Binding Minutes}" Keyboard="Numeric"/>
-                    <Button Grid.Column="2" Text="Start" Command="{Binding StartCommand}"/>
+                    <Label Grid.Row="0" Grid.Column="1" Text="Minutes:" HorizontalOptions="End" VerticalOptions="Center" FontSize="Medium"/>
+                    <Entry Grid.Row="0" Grid.Column="2" Text="{Binding Minutes}" WidthRequest="100" Keyboard="Numeric" HorizontalTextAlignment="Center"/>
+
+                    <Label Grid.Row="1" Grid.Column="1" Text="Price:" HorizontalOptions="End" VerticalOptions="Center" FontSize="Medium"/>
+                    <Entry Grid.Row="1" Grid.Column="2" Text="{Binding Price}" WidthRequest="100" Keyboard="Numeric" HorizontalTextAlignment="Center"/>
+
+                    <Button Grid.Row="2" Grid.ColumnSpan="3" Text="Start" Command="{Binding StartCommand}"/>
                 </Grid>
             </Grid>
         </StackLayout>

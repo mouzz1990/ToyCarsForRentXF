@@ -13,10 +13,14 @@ namespace ToyCarsForRentXF.ViewModels
 {
     public class StartRentViewModel : INotifyPropertyChanged
     {
-        public StartRentViewModel(ToyCar car)
+        INavigation Navigation;
+
+        public StartRentViewModel(ToyCar car, INavigation navigation)
         {
+            Navigation = navigation;
             ToyCarEntry = car;
             Minutes = 10;
+            Price = 30;
         }
 
         private ToyCar toyCarEntry;
@@ -33,15 +37,53 @@ namespace ToyCarsForRentXF.ViewModels
             set { minutes = value; OnPropertyChanged(); }
         }
 
+        private double price;
+        public double Price
+        {
+            get { return price; }
+            set { price = value; OnPropertyChanged(); }
+        }
 
         private ICommand startCommand;
         public ICommand StartCommand
         {
             get
             {
-                return startCommand ?? (startCommand = new Command(() => 
+                return startCommand ?? (startCommand = new Command(async () =>
                 {
-                    //Xamarin.Forms.Device.StartTimer(TimeSpan.FromSeconds(5), () => { return true; });
+                    if (Minutes == 0 || Price < 0) return;
+
+                    //Add report information to the database
+                    ReportClass rc = new ReportClass()
+                    {
+                        MinutesCount = Minutes,
+                        Price = Price,
+                        ToyCarId = ToyCarEntry.CarId,
+                        RentDateTime = DateTime.Now
+                    };
+
+                    App.ReportDatabase.SaveItem(rc);
+
+                    //Set toy car properties
+                    ToyCarEntry.State.IsFree = false;
+                    ToyCarEntry.State.Minutes = Minutes;
+
+                    //Start timer and timer callback function
+                    Device.StartTimer(TimeSpan.FromMinutes(1),
+                        () =>
+                        {
+                            ToyCarEntry.State.Minutes--;
+
+                            if (ToyCarEntry.State.Minutes == 0)
+                            {
+                                ToyCarEntry.State.IsFree = true;
+                                return false;
+                            }
+
+                            return true;
+                        });
+
+                    await Navigation.PopAsync();
                 }));
             }
         }

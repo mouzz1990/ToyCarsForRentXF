@@ -9,10 +9,16 @@ using System.Threading.Tasks;
 
 namespace ToyCarsForRentXF.Models
 {
+    [Table("ToyCars")]
     public class ToyCar : INotifyPropertyChanged
     {
+        public ToyCar()
+        {
+            State = new ToyCarState();
+        }
+
         private int carId;
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey, AutoIncrement, Column("id")]
         public int CarId
         {
             get { return carId; }
@@ -20,6 +26,7 @@ namespace ToyCarsForRentXF.Models
         }
 
         private string carTitle;
+        [Column("Title")]
         public string CarTitle
         {
             get { return carTitle; }
@@ -27,11 +34,21 @@ namespace ToyCarsForRentXF.Models
         }
 
         private string imageName;
+        [Column("ImageName")]
         public string ImageName
         {
             get { return imageName; }
             set { imageName = value; OnPropertyChanged(); }
         }
+
+        private ToyCarState state;
+        [Ignore]
+        public ToyCarState State
+        {
+            get { return state; }
+            set { state = value; OnPropertyChanged(); }
+        }
+
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

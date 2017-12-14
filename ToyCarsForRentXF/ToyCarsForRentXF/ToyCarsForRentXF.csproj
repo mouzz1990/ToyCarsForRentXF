@@ -38,10 +38,16 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BoolToBackgroundConverter.cs" />
+    <Compile Include="DataBase\ISQLite.cs" />
+    <Compile Include="DataBase\ReportRepository.cs" />
+    <Compile Include="DataBase\ToyCarsRepository.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReportClass.cs" />
     <Compile Include="Models\ToyCar.cs" />
+    <Compile Include="Models\ToyCarState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\StartRentViewModel.cs" />
