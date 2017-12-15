@@ -24,6 +24,7 @@ namespace ToyCarsForRentXF.ViewModels
             Price = 30;
         }
 
+        #region Properties
         private ToyCar toyCarEntry;
         public ToyCar ToyCarEntry
         {
@@ -44,7 +45,9 @@ namespace ToyCarsForRentXF.ViewModels
             get { return price; }
             set { price = value; OnPropertyChanged(); }
         }
+        #endregion
 
+        #region Commands
         private ICommand startCommand;
         public ICommand StartCommand
         {
@@ -91,7 +94,7 @@ namespace ToyCarsForRentXF.ViewModels
                 }));
             }
         }
-
+        #endregion
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

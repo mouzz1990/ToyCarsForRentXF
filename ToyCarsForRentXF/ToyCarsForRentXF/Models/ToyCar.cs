@@ -49,7 +49,6 @@ namespace ToyCarsForRentXF.Models
             set { state = value; OnPropertyChanged(); }
         }
 
-
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = null)

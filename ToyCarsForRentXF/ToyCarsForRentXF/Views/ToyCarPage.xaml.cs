@@ -21,6 +21,7 @@ namespace ToyCarsForRentXF.Views
             
             tcvm = new ToyCarViewModel(selectedCar, Navigation);
             BindingContext = tcvm;
+            
         }
     }
 }

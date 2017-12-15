@@ -8,6 +8,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <conv:BoolToBackgroundConverter x:Key="boolToBackgroundConverter"/>
+            <conv:PathToImageSourceConverter x:Key="pathToImageConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -30,22 +31,23 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid BackgroundColor="{Binding State.IsFree, Converter={StaticResource Key=boolToBackgroundConverter}}" Margin="3" Padding="3">
+                            <Grid Margin="3" Padding="3" BackgroundColor="{Binding State.IsFree, Converter={StaticResource Key=boolToBackgroundConverter}}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <StackLayout Grid.Row="0">
+                                <StackLayout Grid.Column="0">
 
                                     <StackLayout Orientation="Horizontal">
-                                        <Label Text="{Binding CarTitle}"  FontSize="Large"/>
+                                        <Label Text="{Binding CarTitle}" TextColor="Black" FontSize="Large"/>
                                     </StackLayout>
 
                                     <StackLayout Orientation="Horizontal">
-                                        <Label Text="Minutes: " VerticalOptions="End" HorizontalOptions="Center" FontSize="Medium"/>
-                                        <Label Text="{Binding State.Minutes}" VerticalOptions="End" HorizontalOptions="Center" FontSize="Medium"/>
+                                        <Label Text="Minutes: " TextColor="Black" VerticalOptions="End" HorizontalOptions="Center" FontSize="Medium"/>
+                                        <Label Text="{Binding State.Minutes}" TextColor="Black" VerticalOptions="End" HorizontalOptions="Center" FontSize="Medium"/>
                                     </StackLayout>
-                                    
+
+                                    <Image HorizontalOptions="Start" WidthRequest="150" HeightRequest="150" Source="{Binding ImageName, Converter={StaticResource Key=pathToImageConverter}}"/>
                                 </StackLayout>
                                 <Button IsEnabled="{Binding State.IsFree}" Grid.Column="1" Command="{Binding Path=BindingContext.ToyCarClickCommand, Source={x:Reference contentPage}}" CommandParameter="{Binding}" Text="Start"/>
                             </Grid>

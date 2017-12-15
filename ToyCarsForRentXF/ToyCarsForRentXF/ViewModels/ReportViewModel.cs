@@ -24,6 +24,7 @@ namespace ToyCarsForRentXF.ViewModels
             EndDate = DateTime.Today;
         }
 
+        #region Properties
         private DateTime startDate;
         public DateTime StartDate
         {
@@ -38,21 +39,15 @@ namespace ToyCarsForRentXF.ViewModels
             set { endDate = value; OnPropertyChanged(); }
         }
 
-        private List<ReportClass> reports;
-        public List<ReportClass> Reports
-        {
-            get { return reports; }
-            set { reports = value; OnPropertyChanged(); }
-        }
-
         private List<ReportOutput> reportOuptup;
         public List<ReportOutput> ReportOutput
         {
             get { return reportOuptup; }
             set { reportOuptup = value; OnPropertyChanged(); }
         }
+        #endregion
 
-
+        #region Commands
         private ICommand reportCommand;
         public ICommand ReportCommand
         {
@@ -60,14 +55,12 @@ namespace ToyCarsForRentXF.ViewModels
             {
                 return reportCommand ?? (reportCommand = new Command(() => 
                 {
-                    Reports = App.ReportDatabase.GetItems().ToList();
                     var tc = from report in App.ReportDatabase.GetItems()
                              join car in App.ToyCarDatabase.GetItems() on report.ToyCarId equals car.CarId
                              where report.RentDateTime >= StartDate && report.RentDateTime <= EndDate.AddDays(1)
                              select new { report, car };
 
                     ReportOutput = new List<Models.ReportOutput>();
-                    Reports = new List<ReportClass>();
                     double price = 0;
 
                     ReportOutput.Add(new Models.ReportOutput()
@@ -81,16 +74,6 @@ namespace ToyCarsForRentXF.ViewModels
 
                     foreach (var t in tc)
                     {
-                        Reports.Add(new ReportClass()
-                        {
-                            MinutesCount = t.report.MinutesCount,
-                            Price = t.report.Price,
-                            RentDateTime = t.report.RentDateTime,
-                            ToyCarEntry = t.car,
-                            ToyCarId = t.car.CarId,
-                            ReportId = t.report.ReportId
-                        });
-
                         ReportOutput.Add(new Models.ReportOutput()
                         {
                             CarTitle = t.car.CarTitle,
@@ -104,11 +87,11 @@ namespace ToyCarsForRentXF.ViewModels
 
                     ReportOutput.Add(new Models.ReportOutput() { RentDate = "", CarTitle = "", Minutes = "Sum:", Price = price.ToString() });
 
-                    Debug.WriteLine("DEBUG: " + Reports.Count);
+                    Debug.WriteLine("DEBUG: " + ReportOutput.Count);
                 }));
             }
         }
-
+        #endregion
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

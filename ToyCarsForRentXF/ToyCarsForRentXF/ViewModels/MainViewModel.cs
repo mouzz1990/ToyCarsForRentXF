@@ -25,19 +25,9 @@ namespace ToyCarsForRentXF.ViewModels
             Page = page;
 
             ToyCars = new ObservableCollection<ToyCar>(App.ToyCarDatabase.GetItems());
-
-            //ToyCars = new ObservableCollection<ToyCar>()
-            //{
-            //    new ToyCar() { CarId = 1, CarTitle = "1", ImageName = "1.jpg" },
-            //    new ToyCar() { CarId = 2, CarTitle = "2", ImageName = "2.jpg" },
-            //    new ToyCar() { CarId = 3, CarTitle = "3", ImageName = "3.jpg" },
-            //    new ToyCar() { CarId = 4, CarTitle = "4", ImageName = "4.jpg" },
-            //    new ToyCar() { CarId = 5, CarTitle = "5", ImageName = "5.jpg" },
-            //    new ToyCar() { CarId = 6, CarTitle = "6", ImageName = "6.jpg" },
-            //};
-            Debug.WriteLine(ToyCars.Count);
         }
 
+        #region Properties
         private ToyCar selectedCar;
         public ToyCar SelectedCar
         {
@@ -52,7 +42,9 @@ namespace ToyCarsForRentXF.ViewModels
             get { return toyCars; }
             set { toyCars = value; OnPropertyChanged(); }
         }
+        #endregion
 
+        #region Commands
         private ICommand toyCarClickCommand;
         public ICommand ToyCarClickCommand
         {
@@ -130,7 +122,6 @@ namespace ToyCarsForRentXF.ViewModels
         }
 
         private ICommand reportCommand;
-
         public ICommand ReportCommand
         {
             get
@@ -143,7 +134,7 @@ namespace ToyCarsForRentXF.ViewModels
 
             }
         }
-
+        #endregion
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
