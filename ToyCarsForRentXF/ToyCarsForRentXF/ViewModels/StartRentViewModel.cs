@@ -22,6 +22,18 @@ namespace ToyCarsForRentXF.ViewModels
             ToyCarEntry = car;
             Minutes = 10;
             Price = 30;
+
+            MessagingCenter.Subscribe<string>(this, "TimerTicked", (message) => 
+            {
+                int min = int.Parse(message);
+                ToyCarEntry.State.Minutes = min;
+            });
+
+            MessagingCenter.Subscribe<string>(this, "TimerStopped", message => 
+            {
+                ToyCarEntry.State.Minutes = 0;
+                ToyCarEntry.State.IsFree = true;
+            });
         }
 
         #region Properties
@@ -73,22 +85,25 @@ namespace ToyCarsForRentXF.ViewModels
                     ToyCarEntry.State.IsFree = false;
                     ToyCarEntry.State.Minutes = Minutes;
 
+                    MessagingCenter.Send<string>(Minutes.ToString(), "StartTimer");
+
                     Debug.WriteLine("DEBUG: " + DateTime.Now);
                     //Start timer and timer callback function
-                    Device.StartTimer(TimeSpan.FromMinutes(1),
-                        () =>
-                        {
-                            Debug.WriteLine("DEBUG: " + ToyCarEntry.State.Minutes);
-                            ToyCarEntry.State.Minutes--;
-                            
-                            if (ToyCarEntry.State.Minutes == 0)
-                            {
-                                ToyCarEntry.State.IsFree = true;
-                                return false;
-                            }
 
-                            return true;
-                        });
+                    //Device.StartTimer(TimeSpan.FromMinutes(1),
+                    //    () =>
+                    //    {
+                    //        Debug.WriteLine("DEBUG: " + ToyCarEntry.State.Minutes);
+                    //        ToyCarEntry.State.Minutes--;
+                            
+                    //        if (ToyCarEntry.State.Minutes == 0)
+                    //        {
+                    //            ToyCarEntry.State.IsFree = true;
+                    //            return false;
+                    //        }
+
+                    //        return true;
+                    //    });
 
                     await Navigation.PopAsync();
                 }));

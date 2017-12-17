@@ -9,6 +9,7 @@ using Android.OS;
 using System.Threading.Tasks;
 using System.IO;
 using Android.Content;
+using Xamarin.Forms;
 
 namespace ToyCarsForRentXF.Droid
 {
@@ -30,6 +31,15 @@ namespace ToyCarsForRentXF.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
+
+            MessagingCenter.Subscribe<string>(this, "StartTimer", (message) =>
+            {
+                int m = int.Parse(message);
+                
+                Intent intent = new Intent(this, typeof(ToyCarTimerService));
+                intent.PutExtra("minutes", m);
+                StartService(intent);
+            });
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)

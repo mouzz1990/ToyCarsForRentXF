@@ -171,6 +171,7 @@
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLite_Android.cs" />
+    <Compile Include="ToyCarTimerService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
